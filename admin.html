@@ -134,6 +134,10 @@
             text-decoration: none;
             display: inline-block;
           "
+          onclick="
+            AUTH.logout();
+            return false;
+          "
           >Logout</a
         >
       </div>
@@ -172,6 +176,11 @@
       </tbody>
     </table>
 
+    <script src="js/auth.js"></script>
     <script src="js/admin.js"></script>
+    <script>
+      // Protect this route - only admins can access
+      AUTH.protectRoute("admin");
+    </script>
   </body>
 </html>

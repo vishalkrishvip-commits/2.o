@@ -1,41 +1,59 @@
 {
-    "products": [
-        {
-            "id": 11,
-            "name": "Organic Honey",
-            "category": "groceries",
-            "price": 210,
-            "originalPrice": 260,
-            "unit": "250g",
-            "rating": 4.7,
-            "reviews": 132,
-            "organic": true,
-            "popular": false,
-            "inStock": false,
-            "description": "Pure raw honey sourced from certified organic apiaries. Unfiltered and unpasteurized to preserve natural enzymes, pollens, and health benefits.",
-            "nutritionalFacts": {
-                "Calories": "304 kcal",
-                "Carbohydrates": "82g",
-                "Protein": "0.3g",
-                "Fat": "0g",
-                "Sugar": "82g"
-            },
-            "color": "#fffde7",
-            "svgPath": "<path d=\"M8 8h8v9a4 4 0 0 1-4 4 4 4 0 0 1-4-4V8z\" fill=\"#ffe082\"/><path d=\"M9 8L10 4h4l1 4H9z\" fill=\"#ffb300\"/><path d=\"M7 11h10v2H7z\" fill=\"#ffb300\"/><path d=\"M12 14c-1.5 0-2.5 1-2.5 2s1.5 1.5 2.5 1.5 2.5-.5 2.5-1.5-1-2-2.5-2z\" fill=\"#ffa000\"/><circle cx=\"11\" cy=\"15.5\" r=\"0.3\" fill=\"#ffffff\"/>"
-        },
-        {
-            "name": "pic",
-            "category": "wallpaper",
-            "price": 20,
-            "unit": "",
-            "inStock": true,
-            "rating": 5,
-            "reviews": 0,
-            "image": "/uploads/1786696422361-gojo_2.jpg",
-            "color": "#ffffff",
-            "svgPath": "<circle cx=\"12\" cy=\"12\" r=\"8\" fill=\"#ccc\"/>",
-            "id": 12
-        }
-    ],
-    "orders": []
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwxyz",
+      "role": "admin",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Customer User",
+      "email": "customer@example.com",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwxyz",
+      "role": "customer",
+      "createdAt": "2024-01-02T00:00:00Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 11,
+      "name": "Organic Honey",
+      "category": "groceries",
+      "price": 210,
+      "originalPrice": 260,
+      "unit": "250g",
+      "rating": 4.7,
+      "reviews": 132,
+      "organic": true,
+      "popular": false,
+      "inStock": false,
+      "description": "Pure raw honey sourced from certified organic apiaries. Unfiltered and unpasteurized to preserve natural enzymes, pollens, and health benefits.",
+      "nutritionalFacts": {
+        "Calories": "304 kcal",
+        "Carbohydrates": "82g",
+        "Protein": "0.3g",
+        "Fat": "0g",
+        "Sugar": "82g"
+      },
+      "color": "#fffde7",
+      "svgPath": "<path d=\"M8 8h8v9a4 4 0 0 1-4 4 4 4 0 0 1-4-4V8z\" fill=\"#ffe082\"/><path d=\"M9 8L10 4h4l1 4H9z\" fill=\"#ffb300\"/><path d=\"M7 11h10v2H7z\" fill=\"#ffb300\"/><path d=\"M12 14c-1.5 0-2.5 1-2.5 2s1.5 1.5 2.5 1.5 2.5-.5 2.5-1.5-1-2-2.5-2z\" fill=\"#ffa000\"/><circle cx=\"11\" cy=\"15.5\" r=\"0.3\" fill=\"#ffffff\"/>"
+    },
+    {
+      "name": "pic",
+      "category": "wallpaper",
+      "price": 20,
+      "unit": "",
+      "inStock": true,
+      "rating": 5,
+      "reviews": 0,
+      "image": "/uploads/1786696422361-gojo_2.jpg",
+      "color": "#ffffff",
+      "svgPath": "<circle cx=\"12\" cy=\"12\" r=\"8\" fill=\"#ccc\"/>",
+      "id": 12
+    }
+  ],
+  "orders": []
 }

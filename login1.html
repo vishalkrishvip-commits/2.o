@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery Login</title>
-
+    <title>Authentication - FreshCart</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -19,136 +18,441 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
 
-        .login-container {
-            width: 380px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 35px;
-            color: white;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         .logo {
-            text-align: center;
-            font-size: 32px;
+            font-size: 40px;
             margin-bottom: 10px;
         }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 25px;
+        .auth-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 5px;
         }
 
-        .input-group {
-            margin-bottom: 18px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            outline: none;
-            font-size: 15px;
-        }
-
-        .options {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
+        .auth-header p {
+            color: #999;
             font-size: 14px;
         }
 
-        .options a {
-            color: #fff;
-            text-decoration: none;
+        .form-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
         }
 
-        .login-btn {
-            width: 100%;
-            padding: 14px;
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
             border: none;
-            border-radius: 10px;
-            background: #ff6b00;
-            color: white;
-            font-size: 18px;
+            background: none;
+            color: #999;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
         }
 
-        .login-btn:hover {
-            background: #e65c00;
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
         }
 
-    .signup {
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #388e3c;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer-text {
             text-align: center;
+            color: #999;
+            font-size: 13px;
             margin-top: 20px;
         }
 
-        .signup a {
-            color: #ffcc99;
+        .footer-link {
+            color: #667eea;
             text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .demo-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .demo-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .message-box {
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 13px;
+        }
+
+        .message-box.error {
+            background-color: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #d32f2f;
+        }
+
+        .message-box.success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #388e3c;
         }
     </style>
 </head>
 
 <body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <div class="logo">🛒</div>
+            <h1>FreshCart</h1>
+            <p>Your trusted grocery delivery</p>
+        </div>
 
-    <div class="login-container">
-        <div class="logo">🍔</div>
-        <h2>Food Delivery Login</h2>
+        <div class="form-tabs">
+            <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+            <button class="tab-btn" onclick="switchTab('register')">Register</button>
+        </div>
 
-        <form id="loginForm">
-            <div class="input-group">
-                <input type="email" id="loginEmail" placeholder="Email Address" required>
+        <!-- LOGIN FORM -->
+        <div id="loginForm" class="form-section active">
+            <div id="loginMessage" class="message-box"></div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="loginBtn">
+                    <span class="loading" id="loginLoading">
+                        <span class="spinner"></span>
+                    </span>
+                    <span id="loginBtnText">Login</span>
+                </button>
+            </form>
+
+            <div class="demo-link">
+                <p style="font-size: 12px; color: #999; margin-bottom: 8px;">Demo Credentials:</p>
+                <p style="font-size: 12px; color: #667eea;">📧 admin@example.com | 🔑 admin123</p>
+                <p style="font-size: 12px; color: #667eea;">📧 customer@example.com | 🔑 customer123</p>
             </div>
+        </div>
 
-            <div class="input-group">
-                <input type="password" id="loginPassword" placeholder="Password" required>
-            </div>
+        <!-- REGISTER FORM -->
+        <div id="registerForm" class="form-section">
+            <div id="registerMessage" class="message-box"></div>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" placeholder="John Doe" required>
+                </div>
 
-            <div class="options">
-                <label>
-                    <input type="checkbox"> Remember Me
-                </label>
-                <a href="#">Forgot Password?</a>
-            </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+                    <input type="email" id="registerEmail" placeholder="you@example.com" required>
+                </div>
 
-            <button type="submit" class="login-btn">
-                Login
-            </button>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" placeholder="••••••••" required minlength="6">
+                </div>
 
-            <div class="signup">
-                Don't have an account?
-                <a href="#">Sign Up</a>
-            </div>
-            <div class="signup" style="margin-top: 10px;">
-                <a href="admin.html" style="color: #ffcc99; font-size: 13px;">🔒 Admin Dashboard</a>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" placeholder="••••••••" required minlength="6">
+                </div>
+
+                <button type="submit" class="submit-btn" id="registerBtn">
+                    <span class="loading" id="registerLoading">
+                        <span class="spinner"></span>
+                    </span>
+                    <span id="registerBtnText">Create Account</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="footer-text">
+            🔐 Secure authentication with JWT tokens
+        </div>
     </div>
 
     <script>
-        document.getElementById("loginForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const email = document.getElementById("loginEmail").value.trim();
-            const password = document.getElementById("loginPassword").value;
+        const API_BASE_URL = 'http://localhost:3000';
 
-            // Admin login check
-            if (email === "admin@freshcart.com" && password === "admin123") {
-                alert("Welcome, Admin!");
-                window.location.href = "admin.html";
-            } else {
-                alert("Login Successful!");
-                window.location.href = "home.html";
+        function switchTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update form sections
+            document.querySelectorAll('.form-section').forEach(section => section.classList.remove('active'));
+            document.getElementById(tab === 'login' ? 'loginForm' : 'registerForm').classList.add('active');
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            const loginLoading = document.getElementById('loginLoading');
+            const messageBox = document.getElementById('loginMessage');
+
+            // Show loading state
+            loginBtn.disabled = true;
+            loginLoading.style.display = 'inline-block';
+            loginBtnText.textContent = 'Logging in...';
+            messageBox.style.display = 'none';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || 'Login failed');
+                }
+
+                // Store token and user data
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                // Show success message
+                messageBox.className = 'message-box success';
+                messageBox.textContent = '✓ Login successful! Redirecting...';
+                messageBox.style.display = 'block';
+
+                // Redirect based on role
+                setTimeout(() => {
+                    if (data.user.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'home.html';
+                    }
+                }, 1500);
+
+            } catch (error) {
+                messageBox.className = 'message-box error';
+                messageBox.textContent = '✗ ' + error.message;
+                messageBox.style.display = 'block';
+            } finally {
+                loginBtn.disabled = false;
+                loginLoading.style.display = 'none';
+                loginBtnText.textContent = 'Login';
             }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            const registerBtn = document.getElementById('registerBtn');
+            const registerBtnText = document.getElementById('registerBtnText');
+            const registerLoading = document.getElementById('registerLoading');
+            const messageBox = document.getElementById('registerMessage');
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                messageBox.className = 'message-box error';
+                messageBox.textContent = '✗ Passwords do not match';
+                messageBox.style.display = 'block';
+                return;
+            }
+
+            // Show loading state
+            registerBtn.disabled = true;
+            registerLoading.style.display = 'inline-block';
+            registerBtnText.textContent = 'Creating account...';
+            messageBox.style.display = 'none';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || 'Registration failed');
+                }
+
+                // Store token and user data
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                // Show success message
+                messageBox.className = 'message-box success';
+                messageBox.textContent = '✓ Account created! Redirecting...';
+                messageBox.style.display = 'block';
+
+                // Redirect to home
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1500);
+
+            } catch (error) {
+                messageBox.className = 'message-box error';
+                messageBox.textContent = '✗ ' + error.message;
+                messageBox.style.display = 'block';
+            } finally {
+                registerBtn.disabled = false;
+                registerLoading.style.display = 'none';
+                registerBtnText.textContent = 'Create Account';
+            }
+        }
+
+        // Demo credential setup
+        window.addEventListener('load', function() {
+            // Display demo credentials
+            console.log('Demo Credentials:');
+            console.log('Admin - Email: admin@example.com, Password: admin123');
+            console.log('Customer - Email: customer@example.com, Password: customer123');
         });
     </script>
 
