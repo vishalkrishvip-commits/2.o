@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - FreshCart</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f7f6;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #2e7d32;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f8f9fa;
+      }
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+      input[type="number"] {
+        width: 80px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .btn {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        color: white;
+        transition: 0.3s;
+      }
+      .btn-update {
+        background-color: #0288d1;
+      }
+      .btn-update:hover {
+        background-color: #0277bd;
+      }
+      .btn-stock {
+        background-color: #f57c00;
+      }
+      .btn-stock:hover {
+        background-color: #ef6c00;
+      }
+      .btn-delete {
+        background-color: #d32f2f;
+        margin-left: 5px;
+      }
+      .status-badge {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        color: white;
+        font-weight: bold;
+      }
+      .in-stock {
+        background-color: #4caf50;
+      }
+      .out-stock {
+        background-color: #d32f2f;
+      }
+
+      .add-product-form {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: none;
+      }
+      .add-product-form input {
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h2>Grocery Market - Admin Dashboard</h2>
+      <div style="display: flex; gap: 10px; align-items: center">
+        <a
+          href="home.html"
+          class="btn"
+          style="
+            background-color: white;
+            color: #2e7d32;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+          "
+          >🏠 Back to Shop</a
+        >
+        <button
+          class="btn"
+          style="background-color: white; color: #2e7d32; font-weight: bold"
+          onclick="toggleAddForm()"
+        >
+          + Add New Product
+        </button>
+        <a
+          href="login1.html"
+          class="btn"
+          style="
+            background-color: #d32f2f;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+          "
+          >Logout</a
+        >
+      </div>
+    </div>
+
+    <div class="add-product-form" id="addForm">
+      <h3>Add New Product</h3>
+      <input type="text" id="p-name" placeholder="Product Name" />
+      <input
+        type="text"
+        id="p-category"
+        placeholder="Category (e.g., fruits)"
+      />
+      <input type="number" id="p-price" placeholder="Price (₹)" />
+      <input type="text" id="p-unit" placeholder="Unit (e.g., 1 kg)" />
+      <input type="file" id="p-image" accept="image/*" />
+      <button class="btn btn-update" onclick="addProduct()">
+        Save Product
+      </button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price (₹)</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="product-list">
+        <!-- Rendered by admin.js -->
+      </tbody>
+    </table>
+
+    <script src="js/admin.js"></script>
+  </body>
+</html>

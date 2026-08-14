@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshCart - Fresh Groceries Delivered to Your Door</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+   
+    <header>
+        <div class="container nav-container">
+            <!-- Brand Logo -->
+            <a href="index.html" class="logo-section" id="brand-logo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+                <span>FreshCart</span>
+            </a>
+
+           
+            <div class="search-bar-container">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <input type="text" id="search-input" placeholder="Search fresh vegetables, fruits, dairy...">
+            </div>
+
+           
+            <div class="nav-actions">
+                <div class="address-selector" id="address-btn">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span id="current-address">Deliver to: <b>Mumbai, IN</b></span>
+                </div>
+
+                <a href="cart.html" class="nav-btn cart-icon-container">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                    <span>Cart</span>
+                    <div class="cart-badge" id="cart-badge" style="display: none;">0</div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Banner Section -->
+        <section class="hero-section">
+            <div class="hero-banner">
+                <div class="hero-content">
+                    <span class="hero-tag">College Project Special</span>
+                    <h1 class="hero-title">Fresh & Organic Groceries</h1>
+                    <p class="hero-subtitle">Get fresh vegetables, dairy products, fruits, and bakery items delivered to your doorstep within 30 minutes.</p>
+                    <button class="hero-btn" onclick="scrollToProducts()">Shop Now</button>
+                </div>
+                <img src="images/hero_banner.png" alt="Fresh Organic Produce" class="hero-img">
+            </div>
+        </section>
+
+        <section class="categories-section">
+            <div class="section-title-bar">
+                <h2 class="section-title">Shop by Category</h2>
+            </div>
+            <div class="categories-container" id="categories-container">
+                <!-- Dynamic categories will be rendered here -->
+            </div>
+        </section>
+
+        <section class="listing-section" id="products-section">
+            <div class="listing-controls">
+                <div class="results-count" id="results-count">Showing 0 products</div>
+                <select class="sort-select" id="sort-select">
+                    <option value="popular">Sort: Popularity</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Rating: High to Low</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Dynamic cards will be rendered here -->
+            </div>
+        </section>
+    </main>
+
+    
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>FreshCart</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">A clean, responsive grocery platform frontend built for academic demonstration.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="#" onclick="filterByCategory('vegetables')">Vegetables</a></li>
+                    <li><a href="#" onclick="filterByCategory('fruits')">Fruits</a></li>
+                    <li><a href="#" onclick="filterByCategory('dairy')">Dairy Products</a></li>
+                    <li><a href="#" onclick="filterByCategory('bakery')">Bakery & Bread</a></li>
+                    <li><a href="#" onclick="filterByCategory('groceries')">Groceries</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Student Info</h4>
+                <ul>
+                    <li>Course: Final Year Project</li>
+                    <li>Technology: HTML, CSS, JavaScript</li>
+                    <li>Design: Responsive grid & LocalStorage Integration</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FreshCart College Project. Open-Source Academic Demonstration.</p>
+        </div>
+    </footer>
+
+    
+    <div class="toast-container" id="toast-container"></div>
+
+    
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
