@@ -68,7 +68,7 @@ You should see: `Backend server running at http://localhost:3000`
 
 Open `login1.html` and test with:
 
-- **Admin**: admin@example.com / admin123
+- **Admin**: vishalkrishvip@gmail.com / #password
 - **Customer**: customer@example.com / customer123
 
 ---

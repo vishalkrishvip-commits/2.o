@@ -7,12 +7,14 @@
 ## 🧪 TEST ENVIRONMENT SETUP
 
 ### Prerequisites
+
 - Node.js v14+ installed
 - npm installed in backend folder
 - Backend server running on port 3000
 - Frontend files in project root
 
 ### Setup Steps
+
 ```bash
 # 1. Navigate to project
 cd "c:\Users\visha\OneDrive\Desktop\PROJECT 1"
@@ -36,6 +38,7 @@ node server.js
 ## ✅ TEST 1: Admin Registration & Login
 
 ### Test 1A: Register New Admin User
+
 ```
 URL: login1.html
 Steps:
@@ -54,6 +57,7 @@ Expected Result:
 ```
 
 ### Test 1B: Login as Admin
+
 ```
 URL: login1.html
 Steps:
@@ -71,6 +75,7 @@ Expected Result:
 ```
 
 ### Test 1C: Verify JWT Token Stored
+
 ```
 Browser Console (F12):
 1. Type: localStorage.getItem('authToken')
@@ -90,6 +95,7 @@ Expected Result:
 ## ✅ TEST 2: Admin Product Management
 
 ### Test 2A: Add New Product
+
 ```
 URL: admin.html (logged in as admin)
 Steps:
@@ -109,6 +115,7 @@ Expected Result:
 ```
 
 ### Test 2B: Update Product Price
+
 ```
 URL: admin.html (logged in as admin)
 Steps:
@@ -124,6 +131,7 @@ Expected Result:
 ```
 
 ### Test 2C: Toggle Stock Status
+
 ```
 URL: admin.html (logged in as admin)
 Steps:
@@ -136,6 +144,7 @@ Expected Result:
 ```
 
 ### Test 2D: Delete Product
+
 ```
 URL: admin.html (logged in as admin)
 Steps:
@@ -154,6 +163,7 @@ Expected Result:
 ## ✅ TEST 3: Customer Registration & Login
 
 ### Test 3A: Register New Customer
+
 ```
 URL: login1.html
 Steps:
@@ -172,6 +182,7 @@ Expected Result:
 ```
 
 ### Test 3B: Login as Customer
+
 ```
 URL: login1.html
 Steps:
@@ -192,6 +203,7 @@ Expected Result:
 ## ✅ TEST 4: Authorization & Route Protection
 
 ### Test 4A: Admin-Only Route Protection
+
 ```
 URL: Type in browser: file:///c:/Users/visha/OneDrive/Desktop/PROJECT%201/admin.html
 Without Login:
@@ -203,6 +215,7 @@ Expected Result:
 ```
 
 ### Test 4B: Role-Based Access Control
+
 ```
 Steps:
 1. Login as customer (customer@example.com / customer123)
@@ -215,6 +228,7 @@ Expected Result:
 ```
 
 ### Test 4C: Admin Can Access Admin
+
 ```
 Steps:
 1. Logout (if logged in as customer)
@@ -233,6 +247,7 @@ Expected Result:
 ## ✅ TEST 5: API Authorization
 
 ### Test 5A: API Call Without Token (Should Fail)
+
 ```
 Browser Console:
 fetch('http://localhost:3000/api/products', {
@@ -247,6 +262,7 @@ Expected Result:
 ```
 
 ### Test 5B: API Call With Invalid Token (Should Fail)
+
 ```
 Browser Console:
 fetch('http://localhost:3000/api/products', {
@@ -264,6 +280,7 @@ Expected Result:
 ```
 
 ### Test 5C: API Call With Valid Token (Should Work)
+
 ```
 Browser Console (After admin login):
 const token = localStorage.getItem('authToken');
@@ -282,6 +299,7 @@ Expected Result:
 ## ✅ TEST 6: Session Management
 
 ### Test 6A: Token Expiration Handling
+
 ```
 Steps:
 1. Login as admin
@@ -296,6 +314,7 @@ Expected Result:
 ```
 
 ### Test 6B: Manual Logout
+
 ```
 URL: admin.html (logged in)
 Steps:
@@ -313,6 +332,7 @@ Expected Result:
 ## ✅ TEST 7: Error Handling
 
 ### Test 7A: Invalid Login Credentials
+
 ```
 URL: login1.html
 Steps:
@@ -328,6 +348,7 @@ Expected Result:
 ```
 
 ### Test 7B: Invalid Email Format
+
 ```
 URL: login1.html > Register
 Steps:
@@ -342,6 +363,7 @@ Expected Result:
 ```
 
 ### Test 7C: Password Mismatch in Register
+
 ```
 URL: login1.html > Register
 Steps:
@@ -360,29 +382,31 @@ Expected Result:
 
 ## 📊 TEST RESULTS CHECKLIST
 
-| Test | Status | Notes |
-|------|--------|-------|
-| Admin Registration | ⬜ | To be tested |
-| Admin Login | ⬜ | To be tested |
-| JWT Token Storage | ⬜ | To be tested |
-| Add Product | ⬜ | To be tested |
-| Update Price | ⬜ | To be tested |
-| Toggle Stock | ⬜ | To be tested |
-| Delete Product | ⬜ | To be tested |
-| Customer Registration | ⬜ | To be tested |
-| Customer Login | ⬜ | To be tested |
-| Admin Route Protection | ⬜ | To be tested |
-| Role-Based Access | ⬜ | To be tested |
-| API Authorization | ⬜ | To be tested |
-| Session Management | ⬜ | To be tested |
-| Error Handling | ⬜ | To be tested |
+| Test                   | Status | Notes        |
+| ---------------------- | ------ | ------------ |
+| Admin Registration     | ⬜     | To be tested |
+| Admin Login            | ⬜     | To be tested |
+| JWT Token Storage      | ⬜     | To be tested |
+| Add Product            | ⬜     | To be tested |
+| Update Price           | ⬜     | To be tested |
+| Toggle Stock           | ⬜     | To be tested |
+| Delete Product         | ⬜     | To be tested |
+| Customer Registration  | ⬜     | To be tested |
+| Customer Login         | ⬜     | To be tested |
+| Admin Route Protection | ⬜     | To be tested |
+| Role-Based Access      | ⬜     | To be tested |
+| API Authorization      | ⬜     | To be tested |
+| Session Management     | ⬜     | To be tested |
+| Error Handling         | ⬜     | To be tested |
 
 ---
 
 ## 🐛 TROUBLESHOOTING
 
 ### Problem: "Failed to fetch" error on login
+
 **Solution:**
+
 ```bash
 1. Check server is running: netstat -ano | findstr :3000
 2. Start server: cd backend && node server.js
@@ -390,7 +414,9 @@ Expected Result:
 ```
 
 ### Problem: "You do not have permission to access this page"
+
 **Solution:**
+
 ```bash
 1. Check user role in localStorage: localStorage.getItem('user')
 2. Ensure logging in with admin account (not customer)
@@ -399,7 +425,9 @@ Expected Result:
 ```
 
 ### Problem: Products not loading on admin.html
+
 **Solution:**
+
 ```bash
 1. Open DevTools (F12)
 2. Check Console for errors
@@ -409,11 +437,13 @@ Expected Result:
 ```
 
 ### Problem: Can't logout
+
 **Solution:**
+
 ```javascript
 // Manual logout from console:
 localStorage.clear();
-window.location.href = 'login1.html';
+window.location.href = "login1.html";
 ```
 
 ---
@@ -429,7 +459,7 @@ window.location.href = 'login1.html';
 
 ---
 
-**Test Date:** _______________  
-**Tested By:** _______________  
-**Status:** _______________  
-**Notes:** _______________
+**Test Date:** ******\_\_\_******  
+**Tested By:** ******\_\_\_******  
+**Status:** ******\_\_\_******  
+**Notes:** ******\_\_\_******

@@ -47,7 +47,7 @@ try {
   console.log("─".repeat(50));
 
   const testCredentials = [
-    { email: "admin@example.com", password: "admin123", role: "admin" },
+    { email: "vishalkrishvip@gmail.com", password: "#password", role: "admin" },
     { email: "admin@freshcart.com", password: "Admin@123", role: "admin" },
     {
       email: "customer@example.com",

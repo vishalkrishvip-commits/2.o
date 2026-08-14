@@ -36,8 +36,8 @@ const writeDB = (data) => {
 // Admin user setup
 const adminUsers = [
   {
-    email: "admin@example.com",
-    password: "admin123",
+    email: "vishalkrishvip@gmail.com",
+    password: "#password",
     name: "Admin User",
     role: "admin",
   },

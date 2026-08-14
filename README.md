@@ -26,7 +26,7 @@ Open `login1.html` in your browser
 
 ### 4. Login with Demo Credentials
 
-- **Admin:** `admin@example.com` / `admin123`
+- **Admin:** `vishalkrishvip@gmail.com` / `#password`
 - **Customer:** `customer@example.com` / `customer123`
 
 ---

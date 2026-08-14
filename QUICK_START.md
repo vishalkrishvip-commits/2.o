@@ -40,7 +40,7 @@ node setup.js
 **Option B: Manual Demo Users (No Setup Needed)**
 The backend will work with these demo credentials immediately after starting:
 
-- **Admin**: `admin@example.com` / `admin123`
+- **Admin**: `vishalkrishvip@gmail.com` / `#password`
 - **Customer**: `customer@example.com` / `customer123`
 
 ### Step 3: Start Backend Server
