@@ -88,19 +88,26 @@ const AUTH = {
    */
   protectRoute(requiredRole = null) {
     if (!this.isAuthenticated()) {
+      console.warn("Not authenticated, redirecting to login");
       window.location.href = "login1.html";
       return false;
     }
 
-    if (
-      requiredRole &&
-      !this[
-        `is${requiredRole.charAt(0).toUpperCase() + requiredRole.slice(1)}`
-      ]()
-    ) {
-      alert("You do not have permission to access this page.");
-      window.location.href = "home.html";
-      return false;
+    const user = this.getUser();
+
+    if (requiredRole) {
+      const requiredRoleCheck = `is${requiredRole.charAt(0).toUpperCase() + requiredRole.slice(1)}`;
+
+      if (!this[requiredRoleCheck] || !this[requiredRoleCheck]()) {
+        console.error(
+          `User role check failed. Required: ${requiredRole}, User role: ${user ? user.role : "none"}`,
+        );
+        alert(
+          `You do not have permission to access this page. Required role: ${requiredRole}`,
+        );
+        window.location.href = "home.html";
+        return false;
+      }
     }
 
     return true;

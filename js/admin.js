@@ -1,10 +1,17 @@
 const API_URL = "http://localhost:3000/api/products";
 
-document.addEventListener("DOMContentLoaded", fetchProducts);
+document.addEventListener("DOMContentLoaded", () => {
+  // Protect this route - only admins can access
+  AUTH.protectRoute("admin");
+  fetchProducts();
+});
 
 async function fetchProducts() {
   try {
-    const response = await fetch(API_URL);
+    const response = await AUTH.fetch(API_URL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const products = await response.json();
     renderTable(products);
   } catch (error) {
@@ -54,34 +61,38 @@ async function updatePrice(id) {
   const newPrice = document.getElementById(`price-${id}`).value;
 
   try {
-    const res = await fetch(`${API_URL}/${id}`, {
+    const res = await AUTH.fetch(`${API_URL}/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price: parseInt(newPrice) }),
     });
 
     if (res.ok) {
       alert("Price updated successfully!");
       fetchProducts();
+    } else {
+      throw new Error("Failed to update price");
     }
   } catch (e) {
-    alert("Error updating price");
+    console.error("Error:", e);
+    alert("Error updating price: " + e.message);
   }
 }
 
 async function toggleStock(id, currentStatus) {
   try {
-    const res = await fetch(`${API_URL}/${id}`, {
+    const res = await AUTH.fetch(`${API_URL}/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ inStock: !currentStatus }),
     });
 
     if (res.ok) {
       fetchProducts();
+    } else {
+      throw new Error("Failed to toggle stock");
     }
   } catch (e) {
-    alert("Error toggling stock");
+    console.error("Error:", e);
+    alert("Error toggling stock: " + e.message);
   }
 }
 
@@ -89,14 +100,17 @@ async function deleteProduct(id) {
   if (!confirm("Are you sure you want to delete this product?")) return;
 
   try {
-    const res = await fetch(`${API_URL}/${id}`, {
+    const res = await AUTH.fetch(`${API_URL}/${id}`, {
       method: "DELETE",
     });
     if (res.ok) {
       fetchProducts();
+    } else {
+      throw new Error("Failed to delete product");
     }
   } catch (e) {
-    alert("Error deleting product");
+    console.error("Error:", e);
+    alert("Error deleting product: " + e.message);
   }
 }
 
@@ -132,8 +146,15 @@ async function addProduct() {
   }
 
   try {
+    const token = AUTH.getToken();
+    const headers = {};
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
     const res = await fetch(API_URL, {
       method: "POST",
+      headers: headers,
       body: formData,
     });
 
@@ -146,8 +167,13 @@ async function addProduct() {
       if (imageInput) imageInput.value = "";
       toggleAddForm();
       fetchProducts();
+    } else if (res.status === 401 || res.status === 403) {
+      throw new Error("Authorization failed. Please login again.");
+    } else {
+      throw new Error("Failed to add product");
     }
   } catch (e) {
-    alert("Error adding product");
+    console.error("Error:", e);
+    alert("Error adding product: " + e.message);
   }
 }
